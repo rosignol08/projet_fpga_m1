@@ -34,9 +34,13 @@ begin
     return Fin_tempo;
 
    elsif Fin_Tempo == '1' then
-    Start_Tempo <= '0';
-    Fin_tempo <= '1';
-   	return Fin_tempo;
+    if Start_Tempo == '0' then
+        Start_Tempo <= '0';
+        Fin_tempo <= '0';
+   	    return Fin_tempo;
+    else
+        return Fin_tempo;
+    end if;
    else
     return 0.0;
    end if;
