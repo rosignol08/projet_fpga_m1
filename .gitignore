@@ -1,0 +1,9 @@
+# Ignore tout par defaut
+*
+
+# Garder ce fichier de configuration
+!.gitignore
+
+# Garder le dossier codes et tout son contenu
+!codes/
+!codes/**
