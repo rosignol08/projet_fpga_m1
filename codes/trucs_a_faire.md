@@ -103,3 +103,6 @@ _Objectif : Piloter les trains via une interface utilisateur logicielle._
     -   Envoyer la trame uniquement lors de l'appui sur un bouton de validation.
         
     -   Tester sur la plateforme de trains réels.
+
+
+    dans le fichier Generateur trammes faut completer les masque des interupteurs avec les valeurs dans le pdf
