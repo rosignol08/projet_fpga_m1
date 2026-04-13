@@ -152,7 +152,7 @@ begin
 					&'0' 							-- Start Bit
 					&"01000101" 					-- Champ Contrôle
 					&'1' 	;						-- Stop Bit
-	
+	end if;	
 end process;
 
 end Behavioral;
