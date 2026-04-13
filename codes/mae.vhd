@@ -96,7 +96,7 @@ begin
                 
             when ENVOI_1 =>
                 --top depart a dcc 1
-                GO_1 <= 1;
+                GO_1 <= '1';
                 if FIN_1 = '1' then
                     etat_suivant <= SHIFT_REG;
                 else
@@ -107,7 +107,7 @@ begin
 
             when ENVOI_0 =>
                 --top depart a dcc 0
-                GO_0 <= 1;
+                GO_0 <= '1';
                 if FIN_0 = '0' then
                     etat_suivant <= SHIFT_REG;
                 else
