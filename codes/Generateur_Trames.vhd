@@ -114,7 +114,7 @@ begin
 		--> Annonce SNCF (Fonction F13) du Train d'Adresse i
 	elsif Interrupteur(1)='1' then
 	
-		Trame_DCC <= "11111111111111111111111"	-- Préambule
+		Trame_DCC <= "11111111111111"	-- Préambule
 					&'0' 						-- Start Bit
 					&"00000101"					-- Champ Adresse
 					&'0' 						-- Start Bit
@@ -129,7 +129,7 @@ begin
 		--> Annonce SNCF (Fonction F13) du Train d'Adresse i
 	elsif Interrupteur(0)='1' then
 	
-		Trame_DCC <= "11111111111111111111111"	-- Préambule
+		Trame_DCC <= "11111111111111"	-- Préambule
 					&'0' 							-- Start Bit
 					&"00000101"					-- Champ Adresse
 					&'0' 							-- Start Bit
