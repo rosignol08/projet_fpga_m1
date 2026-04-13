@@ -35,123 +35,123 @@ begin
 		--> Trame Marche Avant du Train d'Adresse i
 	if Interrupteur(7)='1' then
 	
-		Trame_DCC <= 				-- Préambule
-					& 				-- Start Bit
-					&				-- Champ Adresse
-					& 				-- Start Bit
-					&				-- Champ Commande
-					& 				-- Start Bit
-					& 				-- Champ Contrôle
-					& 	;			-- Stop Bit
+		Trame_DCC <= "11111111111111111111111"	-- Préambule = tout les bits - 51
+					&'0'					 		-- Start Bit
+					&"00000101"					-- Champ Adresse num 5 par exemple
+					&'0' 							-- Start Bit
+					&"01100010"					-- Champ Commande le 3 eme bit D = 1 pour avant et 0 pour arrière 00010 pour step1 marche pas vite
+					&'0' 							-- Start Bit
+					&"01111010"				 	-- Champ Contrôle xor 1+0=1 0+0=0 1+1=0
+					&'1' 	;						-- Stop Bit
 
 	-- Interrupteur 6 Activé
 		--> Trame Marche Arrière du Train d'Adresse i
 	elsif Interrupteur(6)='1' then
 	
-		Trame_DCC <= 				-- Préambule
-					& 				-- Start Bit
-					&				-- Champ Adresse
-					& 				-- Start Bit
-					&				-- Champ Commande
-					& 				-- Start Bit
-					& 				-- Champ Contrôle
-					& 	;			-- Stop Bit
+		Trame_DCC <= "11111111111111111111111"	-- Préambule
+					&'0'			 				-- Start Bit
+					&"00000101"					-- Champ Adresse
+					&'0'			 				-- Start Bit
+					&"01000010"					-- Champ Commande
+					&'0'			 				-- Start Bit
+					&"01000111"			 		-- Champ Contrôle
+					&'1'			 	;			-- Stop Bit
 
 
 	-- Interrupteur 5 Activé
 		--> Allumage des Phares du Train d'Adresse i
 	elsif Interrupteur(5)='1' then
 	
-		Trame_DCC <= 				-- Préambule
-					& 				-- Start Bit
-					&				-- Champ Adresse
-					& 				-- Start Bit
-					&				-- Champ Commande
-					& 				-- Start Bit
-					& 				-- Champ Contrôle
-					& 	;			-- Stop Bit
+		Trame_DCC <= "11111111111111111111111" 	-- Préambule
+					&'0'			 				-- Start Bit
+					&"00000101"					-- Champ Adresse
+					&'0'			 				-- Start Bit
+					&"10010000"					-- Champ Commande
+					&'0'			 				-- Start Bit
+					&"10001101"			 		-- Champ Contrôle
+					&'1'			 	;			-- Stop Bit
 
 	-- Interrupteur 4 Activé
 		--> Extinction des Phares du Train d'Adresse i
 	elsif Interrupteur(4)='1' then
 	
-		Trame_DCC <= 				-- Préambule
-					& 				-- Start Bit
-					&				-- Champ Adresse
-					& 				-- Start Bit
-					&				-- Champ Commande
-					& 				-- Start Bit
-					& 				-- Champ Contrôle
-					& 	;			-- Stop Bit
+		Trame_DCC <= "11111111111111111111111"	-- Préambule
+					&'0' 							-- Start Bit
+					&"00000101"					-- Champ Adresse
+					&'0' 							-- Start Bit
+					&"10000000"					-- Champ Commande
+					&'0' 							-- Start Bit
+					&"10000101" 					-- Champ Contrôle
+					&'1' 	;						-- Stop Bit
 
 	-- Interrupteur 3 Activé
 		--> Activation du Klaxon (Fonction F11) du Train d'Adresse i
 	elsif Interrupteur(3)='1' then
 	
-		Trame_DCC <= 				-- Préambule
-					& 				-- Start Bit
-					&				-- Champ Adresse
-					& 				-- Start Bit
-					&				-- Champ Commande
-					& 				-- Start Bit
-					& 				-- Champ Contrôle
-					& 	;			-- Stop Bit
+		Trame_DCC <= "11111111111111111111111"	-- Préambule
+					&'0' 							-- Start Bit
+					&"00000101"					-- Champ Adresse
+					&'0' 							-- Start Bit
+					&"10100100"					-- Champ Commande
+					&'0' 							-- Start Bit
+					&"10100001" 					-- Champ Contrôle
+					&'1' 	;						-- Stop Bit
 
 	-- Interrupteur 2 Activé
-		--> Réamorçage du Klaxon (Fonction F11) du Train d'Adresse i
+		--> Réamorçage du Klaxon (Fonction F11) du Train d'Adresse i jsp ça veut dire quoi donc je désactive juste le klaxson
 	elsif Interrupteur(2)='1' then
 	
-		Trame_DCC <= 				-- Préambule
-					& 				-- Start Bit
-					&				-- Champ Adresse
-					& 				-- Start Bit
-					&				-- Champ Commande
-					& 				-- Start Bit
-					& 				-- Champ Contrôle
-					& 	;			-- Stop Bit
+		Trame_DCC <= "11111111111111111111111"	-- Préambule
+					&'0' 							-- Start Bit
+					&"00000101"					-- Champ Adresse
+					&'0' 							-- Start Bit
+					&"10100000"					-- Champ Commande
+					&'0' 							-- Start Bit
+					&"10100101" 					-- Champ Contrôle
+					&'1' 	;						-- Stop Bit
 
 	-- Interrupteur 1 Activé
 		--> Annonce SNCF (Fonction F13) du Train d'Adresse i
 	elsif Interrupteur(1)='1' then
 	
-		Trame_DCC <= 				-- Préambule
-					& 				-- Start Bit
-					&				-- Champ Adresse
-					& 				-- Start Bit
-					&				-- Champ Commande (Octet 1)
-					& 				-- Start Bit
-					&				-- Champ Commande (Octet 2)
-					& 				-- Start Bit
-					& 				-- Champ Contrôle
-					& 	;			-- Stop Bit
+		Trame_DCC <= "11111111111111111111111"	-- Préambule
+					&'0' 						-- Start Bit
+					&"00000101"					-- Champ Adresse
+					&'0' 						-- Start Bit
+					&"11011110"					-- Champ Commande (Octet 1)
+					&'0' 						-- Start Bit
+					&"00000001"					-- Champ Commande (Octet 2)
+					&'0'						-- Start Bit
+					&"11011010"					-- Champ Contrôle
+					&'1' 	;						-- Stop Bit
 
 	-- Interrupteur 0 Activé
 		--> Annonce SNCF (Fonction F13) du Train d'Adresse i
 	elsif Interrupteur(0)='1' then
 	
-		Trame_DCC <= 				-- Préambule
-					& 				-- Start Bit
-					&				-- Champ Adresse
-					& 				-- Start Bit
-					&				-- Champ Commande (Octet 1)
-					& 				-- Start Bit
-					&				-- Champ Commande (Octet 2)
-					& 				-- Start Bit
-					& 				-- Champ Contrôle
-					& 	;			-- Stop Bit
+		Trame_DCC <= "11111111111111111111111"	-- Préambule
+					&'0' 							-- Start Bit
+					&"00000101"					-- Champ Adresse
+					&'0' 							-- Start Bit
+					&"11011110"					-- Champ Commande (Octet 1)
+					&'0' 							-- Start Bit
+					&"00000001"					-- Champ Commande (Octet 2)
+					&'0'							-- Start Bit
+					&"11011010"					-- Champ Contrôle
+					&'1' 	;						-- Stop Bit
 
 	-- Aucun Interrupteur Activé
 		--> Arrêt du Train d'Adresse i
 	else 
 	
-		Trame_DCC <= 				-- Préambule
-					& 				-- Start Bit
-					&				-- Champ Adresse
-					& 				-- Start Bit
-					&				-- Champ Commande
-					& 				-- Start Bit
-					& 				-- Champ Contrôle
-					& 	;			-- Stop Bit
+		Trame_DCC <= "11111111111111111111111"	-- Préambule
+					&'0' 							-- Start Bit
+					&"00000101"					-- Champ Adresse
+					&'0' 							-- Start Bit
+					&"01000000"					-- Champ Commande
+					&'0' 							-- Start Bit
+					&"01000101" 					-- Champ Contrôle
+					&'1' 	;						-- Stop Bit
 	
 end process;
 
