@@ -1,0 +1,2 @@
+faut faire un code C qui va construire des trammes lui meme à partir des valeurs des switch et bouton qu'on lui donne 
+il va construire une tramme style avance recule etc etc pour controler le train et afficher sur les leds le numéro de la commande
