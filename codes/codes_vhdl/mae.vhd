@@ -1,6 +1,4 @@
 -- code de la machine à états
-
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 -- la tramme fait 51 bits : 

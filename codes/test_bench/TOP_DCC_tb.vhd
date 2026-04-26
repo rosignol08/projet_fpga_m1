@@ -61,5 +61,3 @@ begin
         wait;
     end process;
 end Behavioral;
-
-

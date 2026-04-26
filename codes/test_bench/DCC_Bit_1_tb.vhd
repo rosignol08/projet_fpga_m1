@@ -3,42 +3,35 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
 
 entity DCC_Bit_1_tb is
---  Port ( );
 end DCC_Bit_1_tb;
 
 architecture Behavioral of DCC_Bit_1_tb is
     signal clk_100  : std_logic := '0'; 
     signal clk_1    : std_logic := '0';
-    signal reset       : std_logic := '1';
-    signal go_1        : std_logic := '0';
-    signal fin_1       : std_logic;
-    signal dcc_1       : std_logic;
+    signal reset    : std_logic := '1';
+    signal go_1     : std_logic := '0';
+    signal fin_1    : std_logic;
+    signal dcc_1    : std_logic;
     
-    -- 3. Définition des périodes d'horloge
-    constant T_100MHz : time := 10 ns;  -- Période pour 100 MHz
-    constant T_1MHz   : time := 1  us;  -- Période pour 1MHz
+    -- 3. D??finition des p??riodes d'horloge
+    constant T_100MHz : time := 10 ns;  -- P??riode pour 100 MHz
+    constant T_1MHz   : time := 1  us;  -- P??riode pour 1MHz
 
 begin
     
-    -- 4.Instanciation du composant 
-    inst_DCC_bit_1 : entity work.DCC_bit_1
+    
+    inst_DCC_bit_1 : entity work.DCC_Bit_1
     port map (clk_100, clk_1, reset, go_1, fin_1, dcc_1);
     
-    -- 5. Génération de l'horloge 100 MHz
-    process_clk_100: process 
+    process 
     begin 
-        clk_100 <= '0';
-        wait for T_100MHz / 2;
-        clk_100 <= '1';
+        clk_100 <= not clk_100;
         wait for T_100MHz / 2;
     end process;
     
-    -- 6. Génération de l'horloge 1 Mhz
-    process_clk_1 : process 
+    process 
     begin 
-        clk_1 <= '0';
-        wait for T_1MHz / 2;
-        clk_1 <= '1';
+        clk_1 <= not clk_1;
         wait for T_1MHz / 2;
     end process;
     
@@ -56,7 +49,7 @@ begin
         reset <= '0';
         wait for 5 us;
         
-        -- Alignement sur un front montant de l'horloge lente pour être propre
+        -- Alignement sur un front montant de l'horloge lente pour ??tre propre
         wait until rising_edge(clk_1);
 
         -- ==============================================================
@@ -65,21 +58,21 @@ begin
         -- La MAE globale donne l'ordre d'envoyer un bit '1'
         go_1 <= '1';
         
-        -- On note le temps de départ
+        -- On note le temps de d??part
         t_start := now; -- POURQUOI ??
         
-        -- On attend que le signal bascule à 1 (fin de la première phase à 0)
+        -- On attend que le signal bascule ?? 1 (fin de la premi??re phase ?? 0)
         wait until dcc_1 = '1';
         t_mid := now;
         
-        -- On laisse une petite marge de tolérance liée à la synchronisation des horloges
+        -- On laisse une petite marge de tol??rance li??e ?? la synchronisation des horloges
         assert (t_mid - t_start >= 57 us and t_mid - t_start <= 59 us)
             report "ERREUR : La phase a 0 ne dure pas 58 us !" severity error;
             
-        -- On attend la fin de l'émission signalée par le module
+        -- On attend la fin de l'??mission signal??e par le module
         wait until fin_1 = '1';
         
-        -- Vérification de la deuxième phase (Impulsion à 1) : Doit durer environ 58 us
+        -- V??rification de la deuxi??me phase (Impulsion ?? 1) : Doit durer environ 58 us
         assert (now - t_mid >= 57 us and now - t_mid <= 59 us)
             report "ERREUR : La phase a 1 ne dure pas 58 us !" severity error;
 
@@ -88,24 +81,16 @@ begin
         go_1 <= '0';
 
         -- ==============================================================
-        -- TEST 2 : Retour à l'état de repos
+        -- TEST 2 : Retour ?? l'??tat de repos
         -- ==============================================================
         wait for 20 us;
         
         -- La MAE globale donne l'ordre d'envoyer un bit '1'
         go_1 <= '1';
         
-        
-        
         -- La MAE globale acquitte et baisse la commande GO
         wait until rising_edge(clk_100);
         go_1 <= '0';
-        
-        
-        
-        
-        
-        
         
         assert (dcc_1 = '0')
             report "ERREUR : Le signal DCC ne retombe pas a 0 apres l'envoi." severity error;
