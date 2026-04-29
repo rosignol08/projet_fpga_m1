@@ -1,2 +1,110 @@
 faut faire un code C qui va construire des trammes lui meme à partir des valeurs des switch et bouton qu'on lui donne 
 il va construire une tramme style avance recule etc etc pour controler le train et afficher sur les leds le numéro de la commande
+
+pour la commande :
+
+SW0                                                           SW2 SW1       SW7  SW6  SW5  SW4  SW3
+Train                                                          Mode         [   paramètres commande   ]
+ |                                                              |                      |
+Train 4 = 0 ou 5 = 1(au cas ou on choisis si quelqu'un a dejà le 4)   00=Vitesse            selon mode
+                                                                01=F0-F4
+                                                                10=F5-F12
+                                                                11=F13-F20
+
+
+
+Détail par mode
+Mode 00 – Vitesse (SW3 à SW7)
+
+SW3 = Direction (0=arrière, 1=avant)
+SW4–SW7 = 4 bits de vitesse (les 4 LSB du champ de vitesse)
+
+Exemples démontrables :
+
+SW7–SW4 = 0010 → Step 2 (marche avant si SW3=1)
+SW7–SW4 = 0100 → Step 5
+
+
+Tu génères 01D XXXXX avec D=SW3 et les 5 bits de vitesse = 0 + SW7..SW4 (ou tu mets SW3 comme MSB des 5 bits de vitesse si tu préfères, à toi de choisir)
+
+
+Mode 01 – Groupe F0–F4 (SW3 à SW7)
+
+SW7 = F0 (phares)
+SW6 = F1
+SW5 = F2
+SW4 = F3
+SW3 = F4
+
+Tu génères : 100 F0 F4 F3 F2 F1 (rappel : bit4=F0, bits3-0=F4 F3 F2 F1)
+Exemples démontrables :
+
+SW7=1, reste=0 → F0 ON (phares allumés)
+SW7=0, SW6=1 → F1 ON (son)
+
+
+Mode 10 – Groupe F5–F12 (SW3 à SW7)
+
+SW7 = S (0 = F9–F12, 1 = F5–F8)
+SW6–SW3 = les 4 bits de fonction
+
+Tu génères : 101 S SW6 SW5 SW4 SW3
+Exemples démontrables :
+
+SW7=1, SW6=1 → F8 ON (Ferroviaire Clank)
+SW7=0, SW4=1 → F10 ON (Conducteur de signal)
+
+
+Mode 11 – Groupe F13–F20 (SW3 à SW7)
+Là t'as 8 bits à gérer mais seulement 5 switchs libres (SW3–SW7), donc tu peux fixer les 3 MSB à 0 et utiliser SW7–SW3 pour F13–F17 uniquement (les autres seront toujours OFF).
+
+SW7 = F13 (Annonce station #1)
+SW6 = F14 (Annonce station #2)
+SW5 = F15
+SW4 = F16
+SW3 = F17
+
+Tu génères : 11011110 + 000 SW7 SW6 SW5 SW4 SW3
+Exemples démontrables :
+
+SW7=1 → F13 ON
+SW6=1 → F14 ON
+
+en gros :
+adresse du train
+SW0 = 0 : adresse 4, 1 : adresse 5 
+mode : 0 : avance recule 1 : F0-F4 2 : F5-F12 3 : F13-F20 
+SW1 = 0 : , 1 :
+SW2 = 0 : , 1 :
+
+soit valeurs on off pour fonciton soit numéro de step 1001 = 8 par exemple 
+SW3 = 0 : , 1 :
+SW4 = 0 : , 1 :
+SW5 = 0 : , 1 :
+SW6 = 0 : , 1 :
+
+
+SW7 = 0 : , 1 :
+
+
+
+
+
+
+
+
+tramme |= 1ULL; //bit de stop (le signal de fin)
+            	tramme |= ((uint64_t)controle << 1); //les bits de control le 1 c'est psk on a mis de stop bit
+            	tramme |= ((uint64_t)commande_finale << 10);//les parametres des fonctions parei pour le 10
+            	tramme |= ((uint64_t)adresse_train << 19);//l'addresse du train
+            	tramme |= (0x7FFFFFULL << 28);//preambule
+            }else{
+            	//sinon on doit faire la trame en 2 octets
+            	//[preambule] 0 [addr] 0 [cmd1] 0 [cmd2] 0 [ctrl] 1
+            	tramme |= 1ULL; //bit de stop (le signal de fin)
+            	tramme |= ((uint64_t)controle << 1); //les bits de control le 1 c'est psk on a mis de stop bit
+            	tramme |= ((uint64_t)commande2<< 10);//la commande num 2 octet 2 (bits 10-17)
+            	tramme |= ((uint64_t)commande_finale << 19);//la commande des fonctions 19 car on a 9 bit avant pour la cmd 2 (bits 19-26)
+            	tramme |= ((uint64_t)adresse_train << 28);//l'addresse du train
+            	tramme |= (0x3FFFULL << 37);//preambule plus petit ducoup car on lui a vole les 9 bits de la cmd 2
+            }
