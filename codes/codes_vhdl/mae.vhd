@@ -106,7 +106,7 @@ begin
             when ENVOI_0 =>
                 --top depart a dcc 0
                 GO_0 <= '1';
-                if FIN_0 = '0' then
+                if FIN_0 = '1' then
                     etat_suivant <= SHIFT_REG;
                 else
                     etat_suivant <= ENVOI_0; --tant qu'on a pas recu le signal fin_0 on reste dans cet etat
