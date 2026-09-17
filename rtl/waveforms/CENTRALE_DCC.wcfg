@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="CENTRALE_DCC_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="CENTRALE_DCC_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="13180000001fs"></ZoomEndTime>
+      <Cursor1Time time="120000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="145"></NameColumnWidth>
+      <ValueColumnWidth column_width="65"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="5" />
+   <wvobject type="logic" fp_name="/CENTRALE_DCC_tb/RESET">
+      <obj_property name="ElementShortName">RESET</obj_property>
+      <obj_property name="ObjectShortName">RESET</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/CENTRALE_DCC_tb/CLK_100MHz">
+      <obj_property name="ElementShortName">CLK_100MHz</obj_property>
+      <obj_property name="ObjectShortName">CLK_100MHz</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/CENTRALE_DCC_tb/TRAME_DCC">
+      <obj_property name="ElementShortName">TRAME_DCC[50:0]</obj_property>
+      <obj_property name="ObjectShortName">TRAME_DCC[50:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/CENTRALE_DCC_tb/SORTIE_DCC">
+      <obj_property name="ElementShortName">SORTIE_DCC</obj_property>
+      <obj_property name="ObjectShortName">SORTIE_DCC</obj_property>
+   </wvobject>
+   <wvobject type="other" fp_name="/CENTRALE_DCC_tb/T_100MHz">
+      <obj_property name="ElementShortName">T_100MHz</obj_property>
+      <obj_property name="ObjectShortName">T_100MHz</obj_property>
+   </wvobject>
+</wave_config>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tempo_sim_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="tempo_sim" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="7970000001fs"></ZoomEndTime>
+      <Cursor1Time time="2380000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="106"></NameColumnWidth>
+      <ValueColumnWidth column_width="60"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="5" />
+   <wvobject type="logic" fp_name="/tempo_sim/clk_100mhz">
+      <obj_property name="ElementShortName">clk_100mhz</obj_property>
+      <obj_property name="ObjectShortName">clk_100mhz</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tempo_sim/reset">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tempo_sim/clk_1mhz">
+      <obj_property name="ElementShortName">clk_1mhz</obj_property>
+      <obj_property name="ObjectShortName">clk_1mhz</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tempo_sim/start_tempo">
+      <obj_property name="ElementShortName">start_tempo</obj_property>
+      <obj_property name="ObjectShortName">start_tempo</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/tempo_sim/fin_tempo">
+      <obj_property name="ElementShortName">fin_tempo</obj_property>
+      <obj_property name="ObjectShortName">fin_tempo</obj_property>
+   </wvobject>
+</wave_config>
