@@ -1,9 +1,21 @@
-# Ignore tout par defaut
-*
+# Fichiers temporaires Vivado
+*.jou 
+*.log
+*.str
+.Xil/
+hd_visual
 
-# Garder ce fichier de configuration
-!.gitignore
+# Caches et builds Vivado
+*.cache/
+*.hw/
+*.ip_user_files/
+*.runs/
+*.sim/
 
-# Garder le dossier codes et tout son contenu
-!codes/
-!codes/**
+# Fichiers temporaires Vitis
+.metadata/
+*.ide/
+
+# Fichiers systeme
+.DS_Store
+Thumbs.db
