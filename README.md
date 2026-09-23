@@ -32,7 +32,22 @@ Embedded application running on a **Microblaze** softcore processor:
 - Languages: VHDL, C
 
 ## Repository Structure 
-- `/rtl`: VHDL source files for the DCC Command Station IP (FSM, counters, registers).
-- `/sw`: C source code for the software application.
+- `/rtl/`: VHDL source files for the DCC Command Station IP (FSM, counters, registers).
+- `/sw/`: C source code for the software application.
 - `/docs/`: report of the project.
 - `/constrains/`: Directory containing the packaged AXI IP for Vivado. 
+- `/tb/`: testbench of the VHDL code.
+
+## Usage
+1. Hardware Generation: Open the project in Vivado, add the custom IP from the ip_repo, generate the Block Design, run synthesis/implementation, and generate the Bitstream.
+2. Hardware Export: Export the hardware definition (.xsa file) for Vitis.
+3. Software Compilation: Open Vitis, create a Platform Project using the exported .xsa file, and an Application Project with the provided C sources.
+4. Execution: Program the FPGA with the Bitstream, then use the Run or Debug mode in Vitis to execute the C code on the Microblaze.
+5. Testing: Connect the DCC output pin (PMOD B) to a Booster circuit connected to the tracks to control the model locomotives.
+
+# Author 
+
+**Ji Stéphane 
+Chaffray Romaric**
+
+Master 1 SESI Student - Sorbonne University
