@@ -33,4 +33,6 @@ Embedded application running on a **Microblaze** softcore processor:
 
 ## Repository Structure 
 - `/rtl`: VHDL source files for the DCC Command Station IP (FSM, counters, registers).
-- ``
+- `/sw`: C source code for the software application.
+- `/docs/`: report of the project.
+- `/constrains/`: Directory containing the packaged AXI IP for Vivado. 
