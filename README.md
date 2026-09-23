@@ -47,7 +47,7 @@ Embedded application running on a **Microblaze** softcore processor:
 
 # Author 
 
-**Ji Stéphane 
+**Ji Stéphane \
 Chaffray Romaric**
 
 Master 1 SESI Student - Sorbonne University
